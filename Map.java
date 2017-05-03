@@ -121,8 +121,8 @@ public class Map{
 			this.player.returnYPos();
 		}
 		if(this.player.getXPos() == 21){
-			if(this.player.getYPos() == cliff+1) this.player.incYPos(10);
-			if(this.player.getYPos() == cliff+10) this.player.decYPos(10);
+			if(this.player.getYPos() == this.cliff+1) this.player.incYPos(10);
+			if(this.player.getYPos() == this.cliff+10) this.player.decYPos(10);
 		}
 
 		for(int i = 0; i<25; i++){
@@ -147,21 +147,21 @@ public class Map{
 					}
 				}
 				else if((i==18)||(i==19)){
-					if((j>=mushroom_pos-1) && (j<=mushroom_pos+1)){
+					if((j>=this.mushroom_pos-1) && (j<=this.mushroom_pos+1)){
 						k = MUSHROOM;
 						if((this.player.getXPos()==i) && (this.player.getYPos()==j)){
 							this.player.returnXPos();
 							this.player.returnYPos();
 						}
 					}
-					else if((j>=brick1_pos-2) && (j<=brick1_pos)){
+					else if((j>=this.brick1_pos-2) && (j<=this.brick1_pos)){
 						k = BRICK;
 						if((this.player.getXPos()==i) && (this.player.getYPos()==j)){
 							this.player.returnXPos();
 							this.player.returnYPos();
 						}
 					}
-					else if((j>=brick2_pos) && (j<=brick2_pos+2)){
+					else if((j>=this.brick2_pos) && (j<=this.brick2_pos+2)){
 						k = BRICK;
 						if((this.player.getXPos()==i) && (this.player.getYPos()==j)){
 							this.player.returnXPos();
