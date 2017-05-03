@@ -42,7 +42,7 @@ public class Map{
 			for(int j = 0; j<100; j++){
 				int k = SPACE;
 				if((i==22)||(i==23)||(i==24)){
-					if((j>cliff) && (j<=(cliff+10))){
+					if((j>this.cliff) && (j<=(this.cliff+10))){
 						k = SPACE;
 					}
 					else{
@@ -193,7 +193,6 @@ public class Map{
 		    			System.out.print("_");
 		    			break;
 		    		case PLAYER:
-		    			//System.out.print(ANSI_RED);
 		    			System.out.print("P");
 		    			break;
 		    		case GRASS:
