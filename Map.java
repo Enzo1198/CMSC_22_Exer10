@@ -14,10 +14,74 @@ public class Map{
 
 	private int[][] map;
 	private Mario player;
+	int cliff, mushroom_pos, brick1_pos, brick2_pos;
+	boolean valid_player_position;
 
 	public Map(Mario player){
 		this.player = player;
 		this.map = new int[25][100];
+
+		Random r = new Random();
+
+		this.cliff = 0;
+	    boolean valid_player_position = true;
+
+	    do {
+	    	this.cliff = r.nextInt(100);
+		    if ( (this.cliff == 0) || (this.cliff > 87) )
+	    		this.valid_player_position = false;
+	    	if ( (this.cliff >= (this.player.getYPos()-10) ) && (this.cliff < this.player.getYPos()) )
+	    		this.valid_player_position = false;
+	    } while (!valid_player_position);
+
+		this.mushroom_pos = r.nextInt(100);
+		this.brick1_pos = this.mushroom_pos-2;
+		this.brick2_pos = this.mushroom_pos+2;
+
+		for(int i = 0; i<25; i++){
+			for(int j = 0; j<100; j++){
+				int k = SPACE;
+				if((i==22)||(i==23)||(i==24)){
+					if((j>cliff) && (j<=(cliff+10))){
+						k = SPACE;
+					}
+					else{
+						switch(i){
+							case 22:
+								k = ROAD;
+								break;
+							case 23:
+								k = GRASS;
+								break;
+							case 24:
+								k = GRASS;
+								break;
+						}
+					}
+				}
+				else if((i==18)||(i==19)){
+					if((j>=mushroom_pos-1) && (j<=mushroom_pos+1)){
+						k = MUSHROOM;
+					}
+					else if((j>=brick1_pos-2) && (j<=brick1_pos)){
+						k = BRICK;
+					}
+					else if((j>=brick2_pos) && (j<=brick2_pos+2)){
+						k = BRICK;
+					}
+					else if((i==this.player.getXPos()) && (j==this.player.getYPos())) k = PLAYER;
+				}
+				else if((i==this.player.getXPos()) && (j==this.player.getYPos())){
+					k = PLAYER;
+				}
+				else if((i==this.player.getOldXPos()) && (j==this.player.getOldYPos())){
+					k = SPACE;
+				}
+				this.map[i][j] = k;
+			}
+		}
+
+
 
 		playGame();
 	}
@@ -34,23 +98,6 @@ public class Map{
 	}
 
 	public void updatePlayerPos(char c){
-		Random r = new Random();
-
-		int cliff = 0;
-	    boolean valid_player_position = true;
-
-	    do {
-	    	cliff = r.nextInt(100);
-		    if ( (cliff == 0) || (cliff > 87) )
-	    		valid_player_position = false;
-	    	if ( (cliff >= (this.player.getYPos()-10) ) && (cliff < this.player.getYPos()) )
-	    		valid_player_position = false;
-	    } while (!valid_player_position);
-
-		int mushroom_pos = r.nextInt(100);
-		int brick1_pos = mushroom_pos-2;
-		int brick2_pos = mushroom_pos+2;
-
 		switch(c){
 			case ' ':
 				break;
